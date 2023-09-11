@@ -89,7 +89,7 @@ const Login = () => {
 
         <button className={classes.logbutton} type="submit">Log in</button>
         <button className={classes.logbutton}>Create new account</button>
-         <Link to="" className={classes.active}>forget password</Link>
+         <Link to="" className={classes.active}>Forgot password</Link>
       </form>
     </div>
   );
