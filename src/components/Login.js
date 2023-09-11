@@ -1,13 +1,11 @@
-
 import React, { useState } from 'react';
-import classes from './LogIn.module.css'; 
 import { Link, useNavigate } from 'react-router-dom';
-
+import classes from './LogIn.module.css';
 
 const Login = () => {
-   const navigate=useNavigate();
+  const navigate = useNavigate();
 
-   const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
@@ -19,44 +17,45 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-        try{
-          fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBHIT4vrvkOkxBfGE-7je5urZRzeBVN-7k`, {
-            method: 'POST',
-            body: JSON.stringify({
-              email: formData.email,
-              password: formData.password,
-            }),
-            headers: {
-              'Content-type': 'application/json'
-            }
-          })
-            .then(res => {
-              if (res.ok) {
-                // Signup success
-                return res.json(); // Parse response JSON
-              } else {
-                // Show error message
-                let errorMessage = "Authentication Failed";
-                if (res && res.error && res.error.message) {
-                  errorMessage = res.error.message;
-                }
-                throw new Error(errorMessage);
-              }
-            })
-            .then(data => {
-             console.log(data);
-             alert("Logged in successfully");
-             navigate('/Home');
-            })
-            .catch(error => {
-              // Handle fetch error
-              alert("Authentication failed");
-            });
-        }
-        catch(error)
+    try {
+      fetch(
+        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBHIT4vrvkOkxBfGE-7je5urZRzeBVN-7k`,
         {
-          alert("Authentication failed");
+          method: 'POST',
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+          headers: {
+            'Content-type': 'application/json',
+          },
         }
+      )
+        .then((res) => {
+          if (res.ok) {
+            // Signup success
+            return res.json(); // Parse response JSON
+          } else {
+            // Show error message
+            let errorMessage = 'Authentication Failed';
+            if (res && res.error && res.error.message) {
+              errorMessage = res.error.message;
+            }
+            throw new Error(errorMessage);
+          }
+        })
+        .then((data) => {
+          console.log(data);
+          alert('Logged in successfully');
+          navigate('/profile'); // Redirect to the /profile page
+        })
+        .catch((error) => {
+          // Handle fetch error
+          alert('Authentication failed');
+        });
+    } catch (error) {
+      alert('Authentication failed');
+    }
 
     console.log(formData);
   };
@@ -65,10 +64,11 @@ const Login = () => {
     <div className={classes.logincontainer}>
       <h2 className={classes.titlelogin}>Log in</h2>
 
-      <form  className = {classes.loginform} onSubmit={handleSubmit}>
+      <form className={classes.loginform} onSubmit={handleSubmit}>
         <div className={classes.loginformGroup}>
           <label>Email:</label>
-          <input className={classes.inputlog}
+          <input
+            className={classes.inputlog}
             type="email"
             name="email"
             value={formData.email}
@@ -78,7 +78,8 @@ const Login = () => {
         </div>
         <div className={classes.loginformGroup}>
           <label>Password:</label>
-          <input  className={classes.inputlog}
+          <input
+            className={classes.inputlog}
             type="password"
             name="password"
             value={formData.password}
@@ -87,9 +88,13 @@ const Login = () => {
           />
         </div>
 
-        <button className={classes.logbutton} type="submit">Log in</button>
+        <button className={classes.logbutton} type="submit">
+          Log in
+        </button>
         <button className={classes.logbutton}>Create new account</button>
-         <Link to="" className={classes.active}>Forgot password</Link>
+        <Link to="" className={classes.active}>
+          Forgot password
+        </Link>
       </form>
     </div>
   );
