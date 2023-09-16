@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import classes from './LogIn.module.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     try {
       fetch(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBHIT4vrvkOkxBfGE-7je5urZRzeBVN-7k`,
+        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDO57GDvByH7Hw3V5rhGMoyUpwR8aVnmOk`,
         {
           method: 'POST',
           body: JSON.stringify({
@@ -45,9 +45,10 @@ const Login = () => {
           }
         })
         .then((data) => {
-          console.log(data);
+          console.log('idToken:', data.idToken); 
+          localStorage.setItem('idToken', data.idToken); 
           alert('Logged in successfully');
-          navigate('/profile'); // Redirect to the /profile page
+          navigate('/profile');
         })
         .catch((error) => {
           // Handle fetch error

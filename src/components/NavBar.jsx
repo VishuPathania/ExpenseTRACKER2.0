@@ -1,41 +1,61 @@
-import React from "react";
-import {  NavLink } from "react-router-dom";
+// NavBar.js
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
+const NavBar = () => {
+  const navigate = useNavigate();
 
-function NavBar() {
-  return (
-    <>
-     <div classNameName='container-fluid nav bg'>
-   <div classNameName='row'>
-    <div classNameName='col-10' mx-auto></div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <NavLink className="navbar-brand" to="#">Navbar</NavLink>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
-  <div className="collapse navbar-collapse" id="navbarNav">
-    <ul className="navbar-nav">
-      <li className="nav-item active">
-        <NavLink className="nav-link" to="/">Home </NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink className="nav-link" to="/Login">LogIn</NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink className="nav-link" to="/Signup">SignUp</NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink className="nav-link disabled" to="#">Spare Disabled</NavLink>
-      </li>
-    </ul>
-  </div>
-</nav>
+  const handleLogout = () => {
   
-                
+    localStorage.removeItem('idToken');
+
+    navigate('/Login');
+  };
+
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container">
+        <Link className="navbar-brand" to="/">
+          Navbar
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item active">
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/Login">
+                LogIn
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/Signup">
+                SignUp
+              </Link>
+            </li>
+            <li className="nav-item">
+              <button className="nav-link" onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
-    </>
+    </nav>
   );
-}
+};
 
 export default NavBar;

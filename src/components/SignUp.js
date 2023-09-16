@@ -22,7 +22,7 @@ const SignUp = () => {
       try
       {
 
-      fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBHIT4vrvkOkxBfGE-7je5urZRzeBVN-7k`, {
+      fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDO57GDvByH7Hw3V5rhGMoyUpwR8aVnmOk`, {
         method: 'POST',
         body: JSON.stringify({
           email: formData.email,
